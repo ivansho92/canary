@@ -1067,7 +1067,7 @@ void Monster::onThink(uint32_t interval) {
 	}
 
 	updateIdleStatus(true);
-	if (isIdle) { 
+	if (isIdle) {
 		return;
 	}
 
@@ -1076,7 +1076,6 @@ void Monster::onThink(uint32_t interval) {
 }
 
 void Monster::onThink_async() {
-
 
 	const auto &attackedCreature = getAttackedCreature();
 	const auto &followCreature = getFollowCreature();
