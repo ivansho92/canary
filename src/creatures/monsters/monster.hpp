@@ -308,7 +308,7 @@ private:
 	std::shared_ptr<Item> getCorpse(const std::shared_ptr<Creature> &lastHitCreature, const std::shared_ptr<Creature> &mostDamageCreature) override;
 
 	void setIdle(bool idle);
-	void updateIdleStatus();
+	void updateIdleStatus(bool now = false);
 	bool getIdleStatus() const;
 
 	void onAddCondition(ConditionType_t type) override;

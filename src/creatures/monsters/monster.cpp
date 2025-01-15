@@ -971,8 +971,8 @@ void Monster::setIdle(bool idle) {
 	}
 }
 
-void Monster::updateIdleStatus() {
-	if (!g_dispatcher().context().isAsync()) {
+void Monster::updateIdleStatus(bool now) {
+	if (!now && !g_dispatcher().context().isAsync()) {
 		setAsyncTaskFlag(UpdateIdleStatus, true);
 		return;
 	}
@@ -1066,16 +1066,17 @@ void Monster::onThink(uint32_t interval) {
 		return;
 	}
 
-	updateIdleStatus();
-	setAsyncTaskFlag(OnThink, true);
-}
-
-void Monster::onThink_async() {
-	if (isIdle) { // updateIdleStatus(); is executed before this method
+	updateIdleStatus(true);
+	if (isIdle) { 
 		return;
 	}
 
 	addEventWalk();
+	setAsyncTaskFlag(OnThink, true);
+}
+
+void Monster::onThink_async() {
+
 
 	const auto &attackedCreature = getAttackedCreature();
 	const auto &followCreature = getFollowCreature();
