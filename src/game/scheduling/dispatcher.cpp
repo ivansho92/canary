@@ -157,6 +157,7 @@ void Dispatcher::executeScheduledEvents() {
 	dispacherContext.reset();
 
 	mergeAsyncEvents(); // merge async events requested by scheduled events
+	executeParallelEvents(static_cast<uint8_t>(TaskGroup::WalkParallel));
 	executeEvents(TaskGroup::GenericParallel); // execute async events requested by scheduled events
 }
 
