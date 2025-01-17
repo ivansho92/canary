@@ -1859,7 +1859,7 @@ void Player::sendCancelTarget() const {
 
 void Player::sendCancelWalk() const {
 	if (client) {
-		client->sendCancelWalk();
+		safeCall([=] { client->sendCancelWalk(); });
 	}
 }
 
@@ -1983,7 +1983,7 @@ void Player::sendIcons() {
 		iconSet = std::unordered_set<PlayerIcon>(tempVector.begin(), tempVector.end());
 	}
 
-	client->sendIcons(iconSet, iconBakragore);
+	safeCall([=] { client->sendIcons(iconSet, iconBakragore);	});
 }
 
 void Player::sendIconBakragore(IconBakragore icon) const {
