@@ -1983,7 +1983,7 @@ void Player::sendIcons() {
 		iconSet = std::unordered_set<PlayerIcon>(tempVector.begin(), tempVector.end());
 	}
 
-	safeCall([=] { client->sendIcons(iconSet, iconBakragore);	});
+	safeCall([=] { client->sendIcons(iconSet, iconBakragore); });
 }
 
 void Player::sendIconBakragore(IconBakragore icon) const {
