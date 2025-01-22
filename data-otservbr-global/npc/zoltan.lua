@@ -74,15 +74,21 @@ local function creatureSayCallback(npc, creature, type, message)
 		npcHandler:setTopic(playerId, 1)
 	elseif npcHandler:getTopic(playerId) == 1 then
 		if player:getSex() == PLAYERSEX_MALE and not player:hasOutfit(130, 2) then
-			if MsgContains(message, "yes") then
-				if player:getItemCount(5903) == 1 then
 					npcHandler:say("I bow to you, player, and hereby grant you the right to wear Ferumbras' hat as accessory. Congratulations!", npc, creature)
 					player:removeItem(5903, 1)
 					player:addOutfitAddon(130, 2) -- male mage addon
 					player:addOutfitAddon(141, 2) -- female summoner addon
 					player:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+				elseif player:getSex() == PLAYERSEX_FEMALE and not player:hasOutfit(138, 2) then
+					npcHandler:say("I bow to you, player, and hereby grant you the right to wear Ferumbras' hat as accessory. Congratulations!", npc, creature)
+					player:removeItem(5903, 1)
+					player:addOutfitAddon(141, 2) -- female summoner addon
+					player:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
 				else
-					npcHandler:say("Sorry you don't have the Ferumbras' hat.", npc, creature)
+					npcHandler:say("You already have this addon.", npc, creature)
+				end
+			else
+				npcHandler:say("Sorry, you don't have the Ferumbras' hat.", npc, creature)
 				end
 			else
 				npcHandler:say("This task is only available for male players who don't already have the addon.", npc, creature)
